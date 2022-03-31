@@ -2,17 +2,23 @@ package pl.drekurion.bookstoreapi.book;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class BookService {
 
     private final BookRepository bookRepository;
+
+    @Autowired
+    public BookService(BookRepository bookRepository)
+    {
+        this.bookRepository = bookRepository;
+    }
 
     public List<Book> getBooks() {
         log.info("Fetching all books.");
@@ -22,17 +28,13 @@ public class BookService {
     public Book getBook(Long bookId)
     {
         log.info("Fetching book by id: " + bookId);
-        return bookRepository.getById(bookId);
+        return bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalStateException("Book with id " + bookId + " does not exist."));
     }
 
-    public void addNewBook(Book book) {
-        log.info("Adding new book: " + book.getTitle());
+    public void insertBook(Book book) {
+        log.info("Inserting book: " + book.getTitle());
         bookRepository.save(book);
-    }
-
-    @Transactional
-    public void updateBook(Book book) {
-        log.info("Updating book with id: " + book.getId());
     }
 
     public void deleteBook(Long bookId) {

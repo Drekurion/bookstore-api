@@ -10,8 +10,10 @@ import static javax.persistence.GenerationType.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table
 public class Book {
 
     @Id
@@ -24,10 +26,7 @@ public class Book {
     @Column(nullable = false)
     private String author;
 
-    @Column(
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
