@@ -3,21 +3,19 @@ package pl.drekurion.bookstoreapi.book;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.drekurion.bookstoreapi.author.Author;
+import pl.drekurion.bookstoreapi.author.AuthorService;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/books")
+@AllArgsConstructor
 public class BookController {
 
     private final BookService bookService;
-
-    @Autowired
-    public BookController(BookService bookService)
-    {
-        this.bookService = bookService;
-    }
+    private final AuthorService authorService;
 
     @GetMapping
     public List<Book> getBooks() {
@@ -31,12 +29,6 @@ public class BookController {
 
     @PostMapping
     public void addNewBook(@RequestBody Book book) {
-        bookService.insertBook(book);
-    }
-
-    @PutMapping(path = "update")
-    public void updateBook(@RequestBody Book book)
-    {
         bookService.insertBook(book);
     }
 

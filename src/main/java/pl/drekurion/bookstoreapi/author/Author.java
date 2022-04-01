@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table
@@ -16,7 +16,15 @@ import static javax.persistence.GenerationType.*;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @SequenceGenerator(
+            name = "author_sequence",
+            sequenceName = "author_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "author_sequence"
+    )
     private Long id;
 
     @Column(nullable = false)

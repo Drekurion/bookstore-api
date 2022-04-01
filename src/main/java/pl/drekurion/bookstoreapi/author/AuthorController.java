@@ -32,7 +32,7 @@ public class AuthorController
     }
 
     @DeleteMapping(path = "delete/{authorId}")
-    public void deleteAuthor(Long authorId) {
+    public void deleteAuthor(@PathVariable(name = "authorId") Long authorId) {
         authorService.deleteAuthor(authorId);
     }
 }

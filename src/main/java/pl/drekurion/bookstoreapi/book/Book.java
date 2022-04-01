@@ -1,7 +1,6 @@
 package pl.drekurion.bookstoreapi.book;
 
 import lombok.*;
-import pl.drekurion.bookstoreapi.author.Author;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,7 +15,15 @@ import static javax.persistence.GenerationType.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @SequenceGenerator(
+            name = "book_sequence",
+            sequenceName = "book_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "book_sequence"
+    )
     private Long id;
 
     @Column(nullable = false)
@@ -31,18 +38,11 @@ public class Book {
     @Column(nullable = false)
     private Integer numberOfPages;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "author_id",
-            referencedColumnName = "id")
-    private Author author;
-
-    public Book(String title, String description, BigDecimal price, Integer numberOfPages, Author author) {
+    public Book(String title, String description, BigDecimal price, Integer numberOfPages) {
 
         this.title = title;
         this.description = description;
         this.price = price;
         this.numberOfPages = numberOfPages;
-        this.author = author;
     }
 }
