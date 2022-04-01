@@ -22,27 +22,27 @@ public class BookstoreApiApplication {
 		SpringApplication.run(BookstoreApiApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner commandLineRunner(BookRepository bookRepository, AuthorRepository authorRepository) {
-		return args -> {
-			Author harris = new Author(1L,"Charlaine","Harris");
-			Author vargas = new Author("Mario", "Vargas Llosa");
-			authorRepository.saveAll(List.of(harris, vargas));
-
-			Book book1 = new Book(
-					1L,
-					"Gorzej niż martwy",
-					"Już nie tylko perypetie miłosne, nie tylko sprawy żywych..",
-					new BigDecimal("29.24"),
-					446
-					);
-			Book book2 = new Book(
-					"Marzenie celta",
-					"Co by się stało, gdyby Roger Casement nie spotkał nigdy Josepha Conrada?",
-					new BigDecimal("37.79"),
-					472
-			);
-			bookRepository.saveAll(List.of(book1, book2));
-		};
-	}
+//	@Bean
+//	CommandLineRunner commandLineRunner(BookRepository bookRepository, AuthorRepository authorRepository) {
+//		return args -> {
+//			Author harris = new Author(1L,"Charlaine","Harris");
+//			Author vargas = new Author("Mario", "Vargas Llosa");
+//			authorRepository.saveAll(List.of(harris, vargas));
+//
+//			Book book1 = new Book(
+//					1L,
+//					"Gorzej niż martwy",
+//					"Już nie tylko perypetie miłosne, nie tylko sprawy żywych..",
+//					new BigDecimal("29.24"),
+//					446
+//					);
+//			Book book2 = new Book(
+//					"Marzenie celta",
+//					"Co by się stało, gdyby Roger Casement nie spotkał nigdy Josepha Conrada?",
+//					new BigDecimal("37.79"),
+//					472
+//			);
+//			bookRepository.saveAll(List.of(book1, book2));
+//		};
+//	}
 }

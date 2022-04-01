@@ -3,8 +3,6 @@ package pl.drekurion.bookstoreapi.book;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.drekurion.bookstoreapi.author.Author;
-import pl.drekurion.bookstoreapi.author.AuthorRepository;
 
 import java.util.List;
 

@@ -1,12 +1,11 @@
 package pl.drekurion.bookstoreapi.book;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.drekurion.bookstoreapi.author.Author;
 import pl.drekurion.bookstoreapi.author.AuthorService;
 
-import java.math.BigDecimal;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -29,6 +28,8 @@ public class BookController {
 
     @PostMapping
     public void addNewBook(@RequestBody Book book) {
+        Author author = authorService.getAuthor(book.getAuthor().getId());
+        book.setAuthor(author);
         bookService.insertBook(book);
     }
 
