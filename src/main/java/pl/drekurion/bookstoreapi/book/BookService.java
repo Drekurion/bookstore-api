@@ -2,23 +2,18 @@ package pl.drekurion.bookstoreapi.book;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.drekurion.bookstoreapi.author.AuthorRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
-
-    @Autowired
-    public BookService(BookRepository bookRepository)
-    {
-        this.bookRepository = bookRepository;
-    }
+    private final AuthorRepository authorRepository;
 
     public List<Book> getBooks() {
         log.info("Fetching all books.");
@@ -33,6 +28,12 @@ public class BookService {
     }
 
     public void insertBook(Book book) {
+        boolean authorExists = authorRepository.existsById(book.getAuthor().getId());
+
+        if(!authorExists) {
+            log.info("Inserting author: " + book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName());
+            authorRepository.save(book.getAuthor());
+        }
         log.info("Inserting book: " + book.getTitle());
         bookRepository.save(book);
     }
