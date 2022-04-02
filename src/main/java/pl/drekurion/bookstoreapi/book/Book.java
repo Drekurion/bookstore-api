@@ -8,7 +8,6 @@ import pl.drekurion.bookstoreapi.author.Author;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor

@@ -31,6 +31,14 @@ public class AuthorController
         authorService.addAuthor(author);
     }
 
+    @PutMapping(path = "update/{authorId}")
+    public void updateAuthor(@PathVariable Long authorId,
+                             @RequestParam(required = false) String firstName,
+                             @RequestParam(required = false) String lastName)
+    {
+        authorService.updateAuthor(authorId, firstName, lastName);
+    }
+
     @DeleteMapping(path = "delete/{authorId}")
     public void deleteAuthor(@PathVariable(name = "authorId") Long authorId) {
         authorService.deleteAuthor(authorId);

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.drekurion.bookstoreapi.author.Author;
 import pl.drekurion.bookstoreapi.author.AuthorService;
 
-import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -26,10 +26,19 @@ public class BookController {
         return bookService.getBook(bookId);
     }
 
+    @PutMapping(path = "update/{bookId}")
+    public void updateBook(@PathVariable("bookId") Long bookId,
+                           @RequestParam(required = false) String title,
+                           @RequestParam(required = false) String description,
+                           @RequestParam(required = false) BigDecimal price,
+                           @RequestParam(required = false) Integer numberOfPages,
+                           @RequestParam(required = false) Long authorId)
+    {
+        bookService.updateBook(bookId, title, description, price, numberOfPages, authorId);
+    }
+
     @PostMapping
     public void addNewBook(@RequestBody Book book) {
-        Author author = authorService.getAuthor(book.getAuthor().getId());
-        book.setAuthor(author);
         bookService.insertBook(book);
     }
 
